@@ -1,7 +1,5 @@
 <template>
   <v-card
-    class="mx-auto overflow-hidden"
-    style="height: 100vh"
   >
 
     <v-app-bar
