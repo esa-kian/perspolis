@@ -46,13 +46,18 @@
           ></v-text-field>
      
           <v-btn
+            @click.prevent="submit()"
             depressed
             color="primary"
             class="my-span"
           >
             Sign up
           </v-btn>
-       
+            <span class="redirect">Do you have an account? 
+            <router-link :to="'/login'">
+            Log in here.
+            </router-link>
+            </span>
       </div>
 
     </div>
@@ -61,6 +66,11 @@
 
 <script>
   export default {
+    methods:{
+      submit(){
+        this.$router.push('/profile');
+      },
+    },
     data: () => ({
       valid: false,
       name: '',
@@ -106,6 +116,7 @@
   justify-content: center;
   margin: auto;
 }
+
 .login{
   display: flex;
   flex-direction: column;
@@ -132,6 +143,9 @@
 }
 .my-span{
   font-weight: 700 !important;
-
+}
+span.redirect{
+  margin-top:10px;
+  font-size: 12px;
 }
 </style>

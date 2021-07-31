@@ -33,6 +33,11 @@
           >
             Login
           </v-btn>
+          <span class="redirect">Don't have an account? 
+            <router-link :to="'/register'">
+            Sign up here.
+            </router-link>
+            </span>
        
       </div>
 
@@ -113,6 +118,10 @@
 }
 .my-span{
   font-weight: 700 !important;
+}
 
+span.redirect{
+  margin-top:10px;
+  font-size: 12px;
 }
 </style>
