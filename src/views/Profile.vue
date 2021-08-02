@@ -6,7 +6,7 @@
                     <div class="avatar">
                         <img :src="avatar" :alt="username">
                     </div>
-                    <div class="name">
+                    <div class="name">  
                         {{ username }}
                     </div>
                 </div>
