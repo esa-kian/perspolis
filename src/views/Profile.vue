@@ -6,7 +6,7 @@
                     <div class="avatar">
                         <img :src="avatar" :alt="username">
                     </div>
-                    <div class="name">
+                    <div class="name">  
                         {{ username }}
                     </div>
                 </div>
@@ -79,6 +79,7 @@
 </template>
 <script>
 export default {
+    // pull request
     data: ()=>({
         username: 'Pink.floyd',
         full_name:'Roger waters',
