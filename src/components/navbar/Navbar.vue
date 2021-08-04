@@ -63,7 +63,9 @@
             <v-list-item-icon>
               <v-icon>mdi-account</v-icon>
             </v-list-item-icon>
+          <router-link :to="'/profile'">
             <v-list-item-title>Profile</v-list-item-title>
+          </router-link>
           </v-list-item>
         </v-list-item-group>
       </v-list>

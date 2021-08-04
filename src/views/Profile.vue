@@ -83,14 +83,12 @@
 <script>
 export default {
     mounted(){
-        console.log(this.editable);
     },
     methods:{
         editActive(){
             this.editable = !this.editable
         }
     },
-    // pull request
     data: ()=>({
         username: 'Pink.floyd',
         full_name:'Roger waters',
@@ -176,7 +174,7 @@ export default {
     width: 120px;
 }
 .header .name{
-background-color: rgba(43, 25, 44, 0.247);
+    background-color: rgba(43, 25, 44, 0.247);
     border-radius: 5px;
     padding: 10px;
     margin: 0 30px;
@@ -211,7 +209,6 @@ background-color: rgba(43, 25, 44, 0.247);
     cursor: pointer;
     bottom: 0px;
     left: 80px;
-
 } 
 .body{
     display: flex;
