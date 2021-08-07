@@ -38,8 +38,8 @@
             </div>
         </div>
         <div class="footer">
-            <div class="comments">
-                <div @click="show_comments = !show_comments" v-if="post.comments.length" class="title">
+            <div v-if="show_more" class="comments">
+                <div @click="showComments" v-if="post.comments.length" class="title">
                     <v-btn x-small icon light color="pink">
                         <v-icon>mdi-comment</v-icon>
                     </v-btn>
@@ -51,17 +51,18 @@
             </div>
             <div class="created">{{post.created_at}}</div>
         </div>
+        <comments :postId="post.id" :comments="post.comments"></comments>
     </div>
 </template>
 
 <script>
+import Comments from './Comments.vue';
 
 
   export default {
     name: 'Post',
     methods:{
         more(){
-            console.log(this.post);
             document.getElementById('post'+this.post.id).style.width = "50%"
             document.getElementById('post'+this.post.id).style.position = "absolute"
             document.getElementById('post'+this.post.id).style.zIndex = "999"
@@ -71,10 +72,19 @@
             document.getElementById('post'+this.post.id).style.width = "300px"
             document.getElementById('post'+this.post.id).style.position = "unset"
             document.getElementById('post'+this.post.id).style.zIndex = "1"
+            document.getElementById('modal'+this.post.id).style.height = '0px';
             this.show_more = false
         },
-        comments(){
-           
+        showComments(){
+            document.getElementById('modal'+this.post.id).style.height = '400px';
+
+            let postId = this.post.id;
+            
+            window.onclick = function(event) {
+                if (event.target == document.getElementById('post'+postId)) {
+                    document.getElementById('modal'+postId).style.height = '0px';
+                }
+            }
         }
     },
     props:{
@@ -82,9 +92,10 @@
     },
     data: ()=>({
       show_more: false,
-      show_comments: false
     }),
-    components: {},
+    components: {
+        Comments
+    },
   }
 </script>
 

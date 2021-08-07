@@ -7,8 +7,6 @@ import vuetify from './plugins/vuetify'
 
 Vue.config.productionTip = false
 
-Vue.prototype.$show_modal = false
-
 new Vue({
   router,
   store,

@@ -20,6 +20,7 @@ import Post from '../components/home/Post.vue'
                 id: 1,
                 content: 'so good!!',
                 likes: 7,
+                liked: true,
                 created_at:'August 04, 2021 05:36',
                 user: {
                   id: 2,
@@ -31,6 +32,7 @@ import Post from '../components/home/Post.vue'
                 id: 1,
                 content: 'good luck!!',
                 likes: 3,
+                liked: false,
                 created_at:'August 04, 2021 05:36',
                 user: {
                   id: 3,
@@ -56,6 +58,7 @@ import Post from '../components/home/Post.vue'
                 id: 1,
                 content: 'so good!!',
                 likes: 7,
+                liked: false,
                 created_at:'August 04, 2021 05:36',
                 user: {
                   id: 2,
@@ -67,6 +70,7 @@ import Post from '../components/home/Post.vue'
                 id: 1,
                 content: 'good luck!!',
                 likes: 3,
+                liked: false,
                 created_at:'August 04, 2021 05:36',
                 user: {
                   id: 3,
@@ -92,6 +96,7 @@ import Post from '../components/home/Post.vue'
                 id: 1,
                 content: 'so good!!',
                 likes: 7,
+                liked: false,
                 created_at:'August 04, 2021 05:36',
                 user: {
                   id: 2,
@@ -103,6 +108,7 @@ import Post from '../components/home/Post.vue'
                 id: 1,
                 content: 'good luck!!',
                 likes: 3,
+                liked: false,
                 created_at:'August 04, 2021 05:36',
                 user: {
                   id: 3,
@@ -128,6 +134,7 @@ import Post from '../components/home/Post.vue'
                 id: 1,
                 content: 'so good!!',
                 likes: 7,
+                liked: false,
                 created_at:'August 04, 2021 05:36',
                 user: {
                   id: 2,
@@ -139,6 +146,7 @@ import Post from '../components/home/Post.vue'
                 id: 1,
                 content: 'good luck!!',
                 likes: 3,
+                liked: false,
                 created_at:'August 04, 2021 05:36',
                 user: {
                   id: 3,
@@ -238,11 +246,12 @@ import Post from '../components/home/Post.vue'
 .main{
     width: 100%;
     height: auto;
-    padding: 20px;
+    padding: 40px 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
     margin: auto;
+
 }
 </style>

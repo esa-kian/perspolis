@@ -30,6 +30,7 @@
             depressed
             color="primary"
             class="my-span"
+            @click="login"
           >
             Login
           </v-btn>
@@ -47,6 +48,12 @@
 
 <script>
   export default {
+    methods:{
+      login(){
+        localStorage.auth = true;
+        this.$router.push('/profile');
+      }
+    },
     data: () => ({
       valid: false,
       firstname: '',
