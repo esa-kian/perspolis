@@ -26,8 +26,8 @@
                 </div>
             </div>
             <div class="post-comment">
-                <textarea name="" id="" class="context"></textarea>
-                <button>Send</button>
+                <textarea v-model="comment" name="" id="" class="context"></textarea>
+                <button @click="submitComment">Send</button>
             </div>
       </div>
   </div>
@@ -41,6 +41,22 @@ export default {
     methods:{
         closeComments(){
             document.getElementById('modal'+this.postId).style.height = '0px';
+        },
+        submitComment(){
+            let mycomment = {
+                id: this.comments.length + 1,
+                content: this.comment,
+                likes: 0,
+                liked: false,
+                created_at: Date(),
+                user: {
+                  id: 1,
+                  username: 'Pink.floyd',
+                  avatar: require('../../assets/avatar.jpg')
+                },
+              };
+
+              this.comments.push(mycomment);
         },
         likeUnlike(comment){
             if(comment.liked){
@@ -57,7 +73,7 @@ export default {
         postId: null
     },
     data: () => ({
-        
+        comment: '',
   }),
 };
 </script>

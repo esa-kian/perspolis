@@ -17,8 +17,10 @@ export default {
     Navbar
     
     },
+    mounted(){
+      this.authenticated = localStorage.authenticated;
+    },
   data: () => ({
-    // pull request
   }),
 };
 </script>

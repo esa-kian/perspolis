@@ -6,17 +6,17 @@
             Home
           </router-link>      
       </li>
-      <li v-if="!auth">
+      <li v-if="!authenticated">
           <router-link :to="'/login'">
             Login
           </router-link>
       </li>
-      <li v-if="!auth">
+      <li v-if="!authenticated">
           <router-link :to='"/register"'>
             Register
           </router-link>      
       </li>
-      <li v-if="auth">
+      <li v-if="authenticated">
           <router-link :to="'/profile'">
               Profile
           </router-link>
@@ -29,15 +29,13 @@
 
   export default {
     mounted(){
-      this.auth = localStorage.auth
+      this.authenticated = localStorage.authenticated;
     },
     methods:{
     },
     data: () => ({
       drawer: false,
       group: null,
-      auth: false,
-     
     }),
   }
 </script>

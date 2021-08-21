@@ -50,8 +50,12 @@
   export default {
     methods:{
       login(){
-        localStorage.auth = true;
+        localStorage.authenticated = true;
+        this.authenticated = true;
+
         this.$router.push('/profile');
+        this.$router.go();
+
       }
     },
     data: () => ({

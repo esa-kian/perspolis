@@ -68,8 +68,12 @@
   export default {
     methods:{
       submit(){
-        localStorage.auth = true
+
+        this.authenticated = true;
+        localStorage.authenticated = true
         this.$router.push('/profile');
+        this.$router.go();
+
       },
     },
     data: () => ({
