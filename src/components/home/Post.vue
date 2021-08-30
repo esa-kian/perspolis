@@ -33,13 +33,15 @@
             <div class="photo">
                 <img :src="post.image" alt="">
             </div>
-            <div class="caption">{{!show_more ? post.caption.substring(0,100) : post.caption }} 
-                <span v-if="!show_more" @click="more">{{(post.caption.length>100?'...More':'')}}</span>
-            </div>
+            <router-link :to="'/post/' + post.id">
+                <div class="caption">
+                    {{ post.caption.substring(0,100)+'...More'  }} 
+                </div>
+            </router-link>
         </div>
         <div class="footer">
             <div v-if="show_more" class="comments">
-                <div @click="showComments" v-if="post.comments.length" class="title">
+                <div v-if="post.comments.length" class="title">
                     <v-btn x-small icon light color="pink">
                         <v-icon>mdi-comment</v-icon>
                     </v-btn>
@@ -51,12 +53,12 @@
             </div>
             <div class="created">{{post.created_at}}</div>
         </div>
-        <comments :postId="post.id" :comments="post.comments"></comments>
+
     </div>
 </template>
 
 <script>
-import Comments from './Comments.vue';
+//import Comments from './Comments.vue';
 
 
   export default {
@@ -75,17 +77,17 @@ import Comments from './Comments.vue';
             document.getElementById('modal'+this.post.id).style.height = '0px';
             this.show_more = false
         },
-        showComments(){
-            document.getElementById('modal'+this.post.id).style.height = '400px';
+      //  showComments(){
+        //     document.getElementById('modal'+this.post.id).style.height = '400px';
 
-            let postId = this.post.id;
+        //     let postId = this.post.id;
             
-            window.onclick = function(event) {
-                if (event.target == document.getElementById('post'+postId)) {
-                    document.getElementById('modal'+postId).style.height = '0px';
-                }
-            }
-        }
+        //     window.onclick = function(event) {
+        //         if (event.target == document.getElementById('post'+postId)) {
+        //             document.getElementById('modal'+postId).style.height = '0px';
+        //         }
+        //     }
+        // }
     },
     props:{
         post:{}
@@ -94,7 +96,7 @@ import Comments from './Comments.vue';
       show_more: false,
     }),
     components: {
-        Comments
+      //  Comments
     },
   }
 </script>

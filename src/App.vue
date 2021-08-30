@@ -27,7 +27,7 @@ export default {
 <style scoped>
 #app{
   font-family: sans-serif;
-  background-image: linear-gradient(rgba(153, 0, 255, 0.76), rgba(172, 109, 224, 0.685), rgb(100, 110, 250));
+  background-image: linear-gradient(rgba(78, 0, 131, 0.212),rgba(45, 30, 58, 0.212), rgba(100, 110, 250, 0.26));
 }
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;

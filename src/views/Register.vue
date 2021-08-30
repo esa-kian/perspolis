@@ -1,7 +1,7 @@
 <template>
     <div class="main">
       <div class="login">
-
+          
           <v-text-field
             class="my-btn"
             v-model="name"
@@ -65,7 +65,9 @@
 </template>
 
 <script>
+
   export default {
+
     methods:{
       submit(){
 

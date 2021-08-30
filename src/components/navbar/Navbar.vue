@@ -21,7 +21,9 @@
               Profile
           </router-link>
         </li>
+        
     </ul>
+    
   </div>
 </template>
 
@@ -32,6 +34,7 @@
       this.authenticated = localStorage.authenticated;
     },
     methods:{
+     
     },
     data: () => ({
       drawer: false,

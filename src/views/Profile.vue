@@ -21,12 +21,14 @@
 
             <div class="body">
                 <div class="actions">
-                    <button> 
-                        <v-icon>
-                            mdi-plus
-                        </v-icon>
-                        New post
-                    </button>
+                    <router-link :to="'/create-post'">
+                        <button> 
+                            <v-icon>
+                                mdi-plus
+                            </v-icon>
+                            New post
+                        </button>
+                    </router-link>
                     <button @click="editActive">
                         <v-icon>
                             mdi-pencil
@@ -49,6 +51,10 @@
                             mdi-wrench
                         </v-icon>
                         Settings
+                    </button>
+                    <button @click.prevent="signout">
+                       <img src="../assets/exit.svg" width="28" height="28" alt="">
+                          Signout
                     </button>
                 </div>
                 <div class="info">
@@ -76,18 +82,33 @@
                         </div>
                     </div>
                 </div>
+                <div class="posts">
+                    <div v-for="post in posts.reverse()" :key="post.id">
+                       <img :src="post.image" width="200" height="100" alt="">
+                       <div class="caption">{{post.caption}}</div>
+                       <div class="date">{{post.created_at}}</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </template>
 <script>
+
 export default {
+   
     mounted(){
+        this.posts = JSON.parse(localStorage.posts);
     },
     methods:{
         editActive(){
             this.editable = !this.editable
-        }
+        },
+        signout(){
+            localStorage.removeItem('authenticated')
+            this.$router.push('/login')
+            this.$router.go()
+      }
     },
     data: ()=>({
         username: 'Pink.floyd',
@@ -98,7 +119,8 @@ export default {
         cover: require('../assets/cover.jpg'),
         followers: 37449574,
         followings: 95,
-        editable: false
+        editable: false,
+        posts: []
     })
 }
 </script>
@@ -281,5 +303,13 @@ input:disabled{
     font-weight: 500;
     color: rgba(82, 60, 60, 0.836);
     margin: 10px 0;
+}
+a {
+    text-decoration: none;
+    color: rgb(43, 25, 44);
+}
+.posts{
+    display: flex;
+    flex-direction: column;
 }
 </style>

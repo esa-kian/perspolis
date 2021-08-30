@@ -1,9 +1,7 @@
 <template>
-  <div class="modal" :id="'modal'+postId">
+
       <div class="content">
-          <span @click="closeComments" class="close">
-                <v-icon>mdi-close</v-icon>
-          </span>
+         
             
             <div class="comment" v-for="comment in comments" :key="comment.id">
                 <div class="user">
@@ -30,7 +28,6 @@
                 <button @click="submitComment">Send</button>
             </div>
       </div>
-  </div>
 </template>
 
 <script>
@@ -38,10 +35,7 @@ export default {
     name: 'Comments',
     components:{
     },
-    methods:{
-        closeComments(){
-            document.getElementById('modal'+this.postId).style.height = '0px';
-        },
+    methods:{ 
         submitComment(){
             let mycomment = {
                 id: this.comments.length + 1,
@@ -70,7 +64,6 @@ export default {
 
     props:{
         comments: [],
-        postId: null
     },
     data: () => ({
         comment: '',
@@ -78,35 +71,17 @@ export default {
 };
 </script>
 <style scoped>
-.modal{
-    display: flex;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 0px;
-    border-radius: 10px 10px 0 0;
-    backdrop-filter: blur(3px);
-    background-color: rgba(240, 248, 255, 0.747);
-    transition: .3s ease;
-    overflow:hidden;
-}
+
 
 .content{
     width: 100%;
-    height: 400px;
-    overflow-y: scroll;
+    height: auto;
+    max-height: 100vh;
     padding: 10px;
+    overflow-y: scroll;
 }
 .content::-webkit-scrollbar {
     display: none;
-}
-
-span.close{
-    cursor: pointer;
-    position: absolute;
-    z-index: 999;
-    right: 10px;
 }
 .comment{
     display: flex;
@@ -165,9 +140,21 @@ textarea.context{
     width: 80%;
     resize: none;
     height: 60px;
+    border-radius: 8px;
+    padding: 7px;
+    outline: none;
+    background-color: rgba(16, 0, 104, 0.137);
+    transition: .2s ease;
+}
+textarea.context:focus{
+    background-color: rgba(16, 0, 104, 0.041);
+    transition: .2s ease;
 }
 .post-comment
 button{
     width: 18%;
+    background-color: rgba(16, 0, 104, 0.137);
+    border-radius: 8px;
+
 }
 </style>
