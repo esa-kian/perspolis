@@ -1,5 +1,5 @@
-# perspolis
-
+# Perspolis
+This project used for teaching my students in Perspolis institute.
 ## Project setup
 ```
 npm install
