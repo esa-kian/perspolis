@@ -7,7 +7,7 @@ import vuetify from './plugins/vuetify'
 
 Vue.config.productionTip = false
 
-Vue.prototype.$show_modal = false
+Vue.prototype.authenticated = Vue.observable(localStorage.authenticated)
 
 new Vue({
   router,

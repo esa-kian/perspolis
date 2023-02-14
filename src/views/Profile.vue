@@ -5,9 +5,11 @@
                 <div class="user">
                     <div class="avatar">
                         <img :src="avatar" :alt="username">
+                        <label for="avatar"></label>
+                        <input :disabled="!editable" type="file" hidden name="avatar" id="avatar">
                     </div>
-                    <div class="name">  
-                        {{ username }}
+                    <div class="name"> 
+                        <input :disabled="!editable" :class="[!editable?'deactive':'active']" type="text" v-model="username" name="" id=""> 
                     </div>
                 </div>
                 <div class="follows">
@@ -19,13 +21,15 @@
 
             <div class="body">
                 <div class="actions">
-                    <button> 
-                        <v-icon>
-                            mdi-plus
-                        </v-icon>
-                        New post
-                    </button>
-                    <button>
+                    <router-link :to="'/create-post'">
+                        <button> 
+                            <v-icon>
+                                mdi-plus
+                            </v-icon>
+                            New post
+                        </button>
+                    </router-link>
+                    <button @click="editActive">
                         <v-icon>
                             mdi-pencil
                         </v-icon>
@@ -48,12 +52,17 @@
                         </v-icon>
                         Settings
                     </button>
+                    <button @click.prevent="signout">
+                       <img src="../assets/exit.svg" width="28" height="28" alt="">
+                          Signout
+                    </button>
                 </div>
                 <div class="info">
                     <div class="fullname">
-                        <div class="title">Full name:</div>
+                        <div class="title">
+                            Full name:</div>
                         <div class="value">
-                            {{full_name}}
+                            <input :disabled="!editable" :class="[!editable?'deactive':'active']" type="text" v-model="full_name" name="" id="">                            
                         </div>
                     </div>
                     <div class="email">
@@ -61,7 +70,7 @@
                             Email:
                         </div>
                         <div class="value">
-                            {{email}}
+                            <input :disabled="!editable" :class="[!editable?'deactive':'active']" type="text" v-model="email" name="" id="">
                         </div>
                     </div>
                     <div class="bio">
@@ -69,8 +78,15 @@
                             Bio:
                         </div>
                         <div class="value">
-                            {{bio}}
+                            <textarea :disabled="!editable" :class="[!editable?'deactive':'active']" name="" v-model="bio" id="" cols="30" rows="10"></textarea>
                         </div>
+                    </div>
+                </div>
+                <div class="posts">
+                    <div v-for="post in posts.reverse()" :key="post.id">
+                       <img :src="post.image" width="200" height="100" alt="">
+                       <div class="caption">{{post.caption}}</div>
+                       <div class="date">{{post.created_at}}</div>
                     </div>
                 </div>
             </div>
@@ -78,8 +94,22 @@
     </div>
 </template>
 <script>
+
 export default {
-    // pull request
+   
+    mounted(){
+        this.posts = JSON.parse(localStorage.posts);
+    },
+    methods:{
+        editActive(){
+            this.editable = !this.editable
+        },
+        signout(){
+            localStorage.removeItem('authenticated')
+            this.$router.push('/login')
+            this.$router.go()
+      }
+    },
     data: ()=>({
         username: 'Pink.floyd',
         full_name:'Roger waters',
@@ -88,7 +118,9 @@ export default {
         avatar: require('../assets/avatar.jpg'),
         cover: require('../assets/cover.jpg'),
         followers: 37449574,
-        followings: 95
+        followings: 95,
+        editable: false,
+        posts: []
     })
 }
 </script>
@@ -128,7 +160,7 @@ export default {
     background-blend-mode: screen;
     background-color: rgba(213, 179, 214, 0.671);
     padding: 10px;
-    background-size: cover;
+    background-size: 100%;
     background-attachment: fixed;
 
 }
@@ -138,19 +170,68 @@ export default {
     width: 30%;
     justify-content: flex-start;
     gap: 20px;
+    position: relative;
 }
 .header .name,
 .follows{
     font-size: 18px;
     font-weight: 600;
-    color: rgba(82, 60, 60, 0.836);
+    text-shadow: 2px 2px 5px #edebf1;
+    color: rgb(57, 33, 58);
+}
+.follows{
+    background-color: rgba(43, 25, 44, 0.247);
+    border-radius: 5px;
+    padding: 10px;
+    margin: 0 30px;
 }
 
+.header .name input{
+    margin: 5px;
+    padding: 10px;
+    background-color: rgba(177, 134, 177, 0.555);
+    text-shadow: 2px 2px 5px #edebf1;
+    border-radius: 5px;
+    min-width: 120px;
+    width: 120px;
+}
+.header .name{
+    background-color: rgba(43, 25, 44, 0.247);
+    border-radius: 5px;
+    padding: 10px;
+    margin: 0 30px;
+}
+.follows div{
+    margin: 5px;
+    padding: 10px;
+    background-color: rgba(177, 134, 177, 0.555);
+    border-radius: 5px;
+    transition: .3s ease;
+    cursor: pointer;
+}
+.follows div:hover{
+    transition: .3s ease;
+    background-color: rgba(177, 134, 177, 0.89);
+}
 .header .avatar img{
     width: 128px;
     height: 128px;
     border-radius: 50%;
 }
+.avatar label{
+    background-image: url('../assets/camera.svg');
+    width: 44px;
+    height: 44px;
+    position: absolute;
+    z-index: 990;
+    background-position: center;
+    background-size: 30px;
+    background-color: #dba9fda8;
+    border-radius: 50%;
+    cursor: pointer;
+    bottom: 0px;
+    left: 80px;
+} 
 .body{
     display: flex;
     width: 100%;
@@ -182,10 +263,53 @@ export default {
 .fullname, .email, .bio{
     margin-bottom: 30px;
 }
+.active{
+    border: 1px solid rgb(93, 67, 97);
+    border-radius: 5px;
+    padding: 10px;
+    width: 160px;
+    height: 45px;
+    outline: none;
+    transition: .3s ease;
+}
+
+input:disabled{
+    padding: 10px;
+    border: 1px solid transparent;
+    color: rgb(43, 25, 44);
+    border-radius: 5px;
+    width: 160px;
+    height: 45px;
+    transition: .3s ease;
+}
+.bio textarea{
+    resize: none;
+    width: 360px;
+    padding: 10px;
+    height: 100px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+.bio textarea:disabled{
+    width: 360px;
+    padding: 10px;
+    height: 100px;
+}
+.bio textarea::-webkit-scrollbar {
+    display: none;
+}
 .body .title{
     font-size: 18px;
     font-weight: 500;
     color: rgba(82, 60, 60, 0.836);
     margin: 10px 0;
+}
+a {
+    text-decoration: none;
+    color: rgb(43, 25, 44);
+}
+.posts{
+    display: flex;
+    flex-direction: column;
 }
 </style>

@@ -4,6 +4,8 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Profile from '../views/Profile.vue'
+import Post from '../views/Post.vue'
+import PostView from '../views/PostView.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +29,17 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: Profile
+  },
+  {
+    path: '/post/:id',
+    name: 'PostView',
+    component: PostView,
+    props: true
+  },
+  {
+    path: '/create-post',
+    name: "Post",
+    component: Post
   },
   {
     path: '/about',

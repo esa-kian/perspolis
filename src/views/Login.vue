@@ -10,7 +10,6 @@
             required
           ></v-text-field>
     
-  
         
           <v-text-field
             class="my-btn"
@@ -30,6 +29,7 @@
             depressed
             color="primary"
             class="my-span"
+            @click="login"
           >
             Login
           </v-btn>
@@ -46,7 +46,19 @@
 </template>
 
 <script>
+
+
   export default {
+    methods:{
+      login(){
+        localStorage.authenticated = true;
+        this.authenticated = true;
+
+        this.$router.push('/profile');
+        this.$router.go();
+
+      }
+    },
     data: () => ({
       valid: false,
       firstname: '',

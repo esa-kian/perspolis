@@ -1,7 +1,7 @@
 <template>
     <div class="main">
       <div class="login">
-
+          
           <v-text-field
             class="my-btn"
             v-model="name"
@@ -65,10 +65,17 @@
 </template>
 
 <script>
+
   export default {
+
     methods:{
       submit(){
+
+        this.authenticated = true;
+        localStorage.authenticated = true
         this.$router.push('/profile');
+        this.$router.go();
+
       },
     },
     data: () => ({
